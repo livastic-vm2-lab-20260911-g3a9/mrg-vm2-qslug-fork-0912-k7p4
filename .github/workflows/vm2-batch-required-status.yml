@@ -1,0 +1,21 @@
+name: VM2 batch required status aggregation
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  gate:
+    name: vm2-batch-required-ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: Per-original-PR status control
+        shell: bash
+        run: |
+          echo "HEAD_REF=${{ github.head_ref }}"
+          if [ "${{ github.head_ref }}" = "vm2-batch-status-blocked-0913-a1" ]; then
+            echo "CONTROL_BLOCKED_PR=1"
+            exit 1
+          fi
+          echo "CONTROL_BLOCKED_PR=0"
+
