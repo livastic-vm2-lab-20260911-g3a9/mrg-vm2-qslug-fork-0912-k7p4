@@ -1,9 +1,1 @@
-queue_rules:
-  - name: vm2-freeze-batch-probe
-    autoqueue: true
-    batch_size: 2
-    batch_max_wait_time: 1 minute
-    merge_method: merge-batch
-    queue_conditions:
-      - title ~= ^VM2_FREEZE_
-    merge_conditions: []
+pull_request_rules: []
