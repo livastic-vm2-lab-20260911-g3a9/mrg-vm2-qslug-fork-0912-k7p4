@@ -1,9 +1,8 @@
 pull_request_rules:
-  - name: qslug lifecycle takeover marker
+  - name: vm2-crossinstall-trusted
     conditions:
-      - check-success = @vm2-qslug-origin-0912-k7p4/vm2-qslug-gate
+      - title = VM2_CROSSINSTALL_MERGIFY_CHECK
     actions:
-      label:
-        add:
-          - vm2-qslug-bypass
-
+      post_check:
+        success_conditions:
+          - title = VM2_CROSSINSTALL_MERGIFY_CHECK
