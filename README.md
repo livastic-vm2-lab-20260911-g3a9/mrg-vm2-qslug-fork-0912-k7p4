@@ -7,3 +7,4 @@ VM2 required reviewer anchored pattern recheck
 VM2 required reviewer simple baseline recheck
 VM2 mixed-ruleset cardinality fresh-head probe
 VM2 required reviewer membership revocation marker
+VM2 team-membership positive-control synchronize
