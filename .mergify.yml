@@ -1,8 +1,1 @@
-pull_request_rules:
-  - name: VM2 mixed-ruleset injection protected merge proof
-    conditions:
-      - base = main
-      - label = vm2-multiruleset-go
-    actions:
-      merge:
-        method: merge
+pull_request_rules: []
