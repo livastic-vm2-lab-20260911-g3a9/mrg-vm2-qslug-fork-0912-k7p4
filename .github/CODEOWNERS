@@ -1,9 +1,0 @@
-# VM2 CODEOWNERS differential matrix
-docs/ @livastic-vm2-primary-20260911
-foo/**/bar.txt @livastic-vm2-primary-20260911
-**/deep?.txt @livastic-vm2-primary-20260911
-/rootonly.txt @livastic-vm2-primary-20260911
-logs @livastic-vm2-primary-20260911
-folder/** @livastic-vm2-primary-20260911
-space\ file.txt @livastic-vm2-primary-20260911
-.github/workflows/secure\ gate.yml @livastic-vm2-primary-20260911
