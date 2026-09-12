@@ -9,3 +9,10 @@ pull_request_rules:
       merge:
         method: merge
 # VM2 regular-file config-change control
+
+  - name: VM2 semantic config-change control only
+    conditions:
+      - title = VM2_NEVER_MATCH_SEMANTIC_CONTROL
+    actions:
+      comment:
+        message: VM2_SEMANTIC_CONTROL_ONLY
