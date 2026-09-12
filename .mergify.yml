@@ -1,13 +1,15 @@
 scopes:
   source:
     manual:
+merge_protections_settings:
+  auto_merge_conditions: true
 queue_rules:
   - name: vm2-buildkite-scope-impact
     batch_size: 1
     merge_method: merge
     queue_conditions:
-      - title ~= ^VM2_BK_QUEUE_
-    merge_conditions:
+      - title ~= ^VM2_BK3_QUEUE_
       - check-success = @github-actions/vm2-buildkite-scope-guard
-merge_protections_settings:
-  auto_merge_conditions: true
+    merge_conditions:
+      - title ~= ^VM2_BK3_QUEUE_
+      - check-success = @github-actions/vm2-buildkite-scope-guard
