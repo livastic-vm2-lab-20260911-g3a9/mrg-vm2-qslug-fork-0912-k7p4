@@ -1,1 +1,8 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: VM2 specific-user reviewer protected merge probe
+    conditions:
+      - author = livastic-vm2-secondary-20260911
+      - label = vm2-required-user-go
+    actions:
+      merge:
+        method: merge
