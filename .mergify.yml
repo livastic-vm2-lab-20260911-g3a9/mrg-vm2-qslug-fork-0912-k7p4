@@ -1,8 +1,10 @@
 pull_request_rules:
-  - name: VM2 CODEOWNERS differential matrix
+  - name: VM2 escaped-space CODEOWNERS protected merge proof
     conditions:
-      - title ~= ^VM2_CODEOWNERS_MATRIX_
-      - label = vm2-codeowners-never-trigger
+      - base = main
+      - author = livastic-vm2-secondary-20260911
+      - from-fork
+      - title = VM2_CODEOWNERS_SPACE_TRIGGER
     actions:
       merge:
         method: merge
