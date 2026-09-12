@@ -1,1 +1,8 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: VM2 required-team membership freshness merge probe
+    conditions:
+      - author = livastic-vm2-secondary-20260911
+      - title = VM2_REQUIRED_TEAM_TRIGGER
+    actions:
+      merge:
+        method: merge
