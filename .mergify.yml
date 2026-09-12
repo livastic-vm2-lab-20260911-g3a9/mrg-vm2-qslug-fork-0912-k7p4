@@ -1,18 +1,1 @@
-pull_request_rules:
-  - name: VM2 dismiss stale approvals on synchronize
-    conditions:
-      - author = livastic-vm2-secondary-20260911
-    actions:
-      dismiss_reviews:
-        approved: true
-        changes_requested: false
-        when: synchronize
-        message: VM2 controlled stale-approval invalidation probe
-  - name: VM2 stale approval protected merge proof
-    conditions:
-      - author = livastic-vm2-secondary-20260911
-      - title = VM2_DISMISS_REVIEW_PAGINATION_TRIGGER
-      - "#approved-reviews-by>=1"
-    actions:
-      merge:
-        method: merge
+pull_request_rules: []
