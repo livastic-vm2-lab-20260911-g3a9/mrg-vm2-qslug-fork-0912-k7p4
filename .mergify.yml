@@ -1,1 +1,10 @@
-pull_request_rules: []
+queue_rules:
+  - name: vm2-inflight-impact-probe
+    autoqueue: true
+    batch_size: 2
+    batch_max_wait_time: 1 minute
+    merge_method: merge-batch
+    branch_protection_injection_mode: merge
+    queue_conditions:
+      - title ~= ^VM2_IMPACT_
+    merge_conditions: []
