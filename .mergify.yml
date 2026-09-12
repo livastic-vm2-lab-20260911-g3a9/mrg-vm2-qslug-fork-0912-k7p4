@@ -1,8 +1,8 @@
 pull_request_rules:
-  - name: VM2 review-thread pagination protected merge proof
+  - name: VM2 required-reviewer file-pattern protected merge proof
     conditions:
       - base = main
-      - label = vm2-pagination-go
+      - label = vm2-required-review-go
     actions:
       merge:
         method: merge
