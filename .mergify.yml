@@ -3,7 +3,7 @@ pull_request_rules:
     conditions:
       - base = main
       - author = livastic-vm2-secondary-20260911
-      - from-fork = true
+      - from-fork
       - title = VM2_PAGINATION_WORKFLOW_TRIGGER
     actions:
       merge:
