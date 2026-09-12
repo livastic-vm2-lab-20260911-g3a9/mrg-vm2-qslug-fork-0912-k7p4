@@ -1,1 +1,10 @@
-pull_request_rules: []
+queue_rules:
+  - name: vm2-merge-batch-review-probe
+    autoqueue: true
+    batch_size: 2
+    batch_max_wait_time: 2 minutes
+    merge_method: merge-batch
+    branch_protection_injection_mode: merge
+    queue_conditions:
+      - title ~= ^VM2_MERGEBATCH_
+    merge_conditions: []
