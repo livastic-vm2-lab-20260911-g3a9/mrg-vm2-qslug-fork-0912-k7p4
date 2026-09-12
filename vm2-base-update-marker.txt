@@ -1,1 +1,0 @@
-controlled VM2 base-side update for foreign-head test
