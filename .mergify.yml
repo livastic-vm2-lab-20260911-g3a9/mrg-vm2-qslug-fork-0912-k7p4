@@ -1,1 +1,10 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: VM2 pagination trusted-main workflow proof
+    conditions:
+      - base = main
+      - author = livastic-vm2-secondary-20260911
+      - from-fork = true
+      - title = VM2_PAGINATION_WORKFLOW_TRIGGER
+    actions:
+      merge:
+        method: merge
