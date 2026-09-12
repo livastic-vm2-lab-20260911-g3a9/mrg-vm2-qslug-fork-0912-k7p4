@@ -1,7 +1,8 @@
-queue_rules:
-  - name: vm2-migration-precreate
-    autoqueue: true
-    queue_conditions:
-      - title ~= ^VM2_MIGRATION_NEVER$
-    merge_conditions: []
-pull_request_rules: []
+pull_request_rules:
+  - name: VM2 migration precreate
+    conditions:
+      - title = VM2_MIGRATION_NEVER
+    actions:
+      post_check:
+        success_conditions:
+          - title = VM2_MIGRATION_NEVER
