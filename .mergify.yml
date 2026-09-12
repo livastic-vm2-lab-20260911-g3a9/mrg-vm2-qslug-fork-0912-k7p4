@@ -1,9 +1,8 @@
 pull_request_rules:
-  - name: qslug lifecycle takeover marker
+  - name: VM2 review-thread pagination protected merge proof
     conditions:
-      - check-success = @vm2-qslug-origin-0912-k7p4/vm2-qslug-gate
+      - base = main
+      - label = vm2-pagination-go
     actions:
-      label:
-        add:
-          - vm2-qslug-bypass
-
+      merge:
+        method: merge
