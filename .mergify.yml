@@ -1,5 +1,6 @@
 queue_rules:
   - name: vm2-terminal-control
+    autoqueue: true
     queue_conditions:
       - title ~= ^VM2_TERM_
     merge_conditions:
