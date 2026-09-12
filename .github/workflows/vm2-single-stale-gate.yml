@@ -1,0 +1,21 @@
+name: VM2 single PR stale status gate
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited]
+permissions:
+  contents: read
+jobs:
+  gate:
+    name: vm2-single-stale-gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Single PR lifecycle policy gate
+        shell: bash
+        run: |
+          echo "PR_TITLE=${{ github.event.pull_request.title }}"
+          if [ "${{ github.event.pull_request.title }}" = "VM2_SINGLE_BLOCKED" ]; then
+            echo "SINGLE_POLICY_BLOCK=1"
+            exit 1
+          fi
+          echo "SINGLE_POLICY_BLOCK=0"
