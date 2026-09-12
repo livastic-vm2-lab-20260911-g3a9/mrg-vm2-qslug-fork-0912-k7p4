@@ -1,1 +1,6 @@
-pull_request_rules: []
+queue_rules:
+  - name: vm2-terminal-control
+    queue_conditions:
+      - title ~= ^VM2_TERM_
+    merge_conditions:
+      - label = vm2-terminal-never
