@@ -1,11 +1,1 @@
-queue_rules:
-  - name: vm2-qbranch-integrity
-    batch_size: 1
-    merge_method: fast-forward
-    allow_queue_branch_edit: false
-    queue_conditions:
-      - title = VM2_QBRANCH_TRIGGER
-    merge_conditions:
-      - check-success = vm2-qbranch-integrity-ci
-merge_protections_settings:
-  auto_merge_conditions: true
+pull_request_rules: []
