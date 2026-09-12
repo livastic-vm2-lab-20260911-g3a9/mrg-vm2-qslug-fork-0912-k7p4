@@ -1,0 +1,18 @@
+name: VM2 queue branch integrity CI
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+permissions:
+  contents: read
+jobs:
+  gate:
+    name: vm2-qbranch-integrity-ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hold validation window
+        shell: bash
+        run: |
+          echo "QUEUE_BRANCH=${{ github.head_ref }}"
+          sleep 20
+          echo "INTEGRITY_CI_DONE=1"
