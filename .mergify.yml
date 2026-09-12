@@ -6,5 +6,6 @@ queue_rules:
   - name: default
     batch_size: 1
     queue_conditions: []
-    merge_conditions: []
+    merge_conditions:
+      - check-success = vm2-isolated-hold
     merge_method: merge
