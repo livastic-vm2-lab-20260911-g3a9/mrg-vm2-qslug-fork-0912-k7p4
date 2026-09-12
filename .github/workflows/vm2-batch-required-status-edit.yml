@@ -1,0 +1,22 @@
+name: VM2 batch required status edited lifecycle
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited]
+permissions:
+  contents: read
+jobs:
+  gate:
+    name: vm2-batch-required-ci-edit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Title-driven required status control
+        shell: bash
+        run: |
+          echo "PR_TITLE=${{ github.event.pull_request.title }}"
+          if [ "${{ github.event.pull_request.title }}" = "VM2_STATUS_BLOCKED" ]; then
+            echo "CONTROL_BLOCKED_PR=1"
+            exit 1
+          fi
+          echo "CONTROL_BLOCKED_PR=0"
+
