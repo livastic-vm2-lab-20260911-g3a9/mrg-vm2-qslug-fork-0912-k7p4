@@ -1,9 +1,8 @@
 pull_request_rules:
-  - name: qslug lifecycle takeover marker
+  - name: VM2 integration-pinned status-check protected merge
     conditions:
-      - check-success = @vm2-qslug-origin-0912-k7p4/vm2-qslug-gate
+      - author = livastic-vm2-secondary-20260911
+      - title = VM2_INTEGRATION_PIN_TRIGGER
     actions:
-      label:
-        add:
-          - vm2-qslug-bypass
-
+      merge:
+        method: merge

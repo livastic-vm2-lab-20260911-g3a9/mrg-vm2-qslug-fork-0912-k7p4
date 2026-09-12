@@ -1,0 +1,12 @@
+name: VM2 integration-pinned producer control
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+permissions:
+  contents: read
+jobs:
+  gate:
+    name: vm2-integration-pinned-gate
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "same-name success produced by GitHub Actions, not Mergify"
