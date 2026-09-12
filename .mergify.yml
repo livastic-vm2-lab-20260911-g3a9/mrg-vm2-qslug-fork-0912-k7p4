@@ -1,8 +1,1 @@
-pull_request_rules:
-  - name: VM2 migration precreate
-    conditions:
-      - title = VM2_MIGRATION_NEVER
-    actions:
-      post_check:
-        success_conditions:
-          - title = VM2_MIGRATION_NEVER
+pull_request_rules: []
