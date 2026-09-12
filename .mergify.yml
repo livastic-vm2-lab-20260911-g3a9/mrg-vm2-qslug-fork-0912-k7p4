@@ -1,6 +1,5 @@
 queue_rules:
   - name: vm2-single-stale-probe
-    autoqueue: true
     batch_size: 1
     batch_max_wait_time: 1 minute
     merge_method: merge-batch
@@ -8,3 +7,5 @@ queue_rules:
     queue_conditions:
       - title ~= ^VM2_SINGLE_
     merge_conditions: []
+merge_protections_settings:
+  auto_merge_conditions: true
