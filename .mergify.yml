@@ -1,0 +1,9 @@
+pull_request_rules:
+  - name: qslug lifecycle takeover marker
+    conditions:
+      - check-success = @vm2-qslug-origin-0912-k7p4/vm2-qslug-gate
+    actions:
+      label:
+        add:
+          - vm2-qslug-bypass
+
