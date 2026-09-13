@@ -10,12 +10,20 @@ jobs:
     name: vm2-buildkite-scope-guard
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Hold only Mergify queue draft
         shell: bash
         run: |
           echo "VM2_HEAD_REF=${GITHUB_HEAD_REF}"
           if [[ "${GITHUB_HEAD_REF}" == mergify/merge-queue/* ]]; then
-            echo 'VM2_SCOPE_DRIFT_DRAFT_WAIT=1'
+            echo 'VM2_SCOPE_OVERLAP_DRAFT_WAIT=1'
             sleep 45
           fi
-          echo 'VM2_SCOPE_DRIFT_GUARD=PASS'
+      - name: Reject combined overlap state
+        shell: bash
+        run: |
+          if [[ -f vm2-overlap-a.txt && -f vm2-overlap-b.txt ]]; then
+            echo 'VM2_SCOPE_OVERLAP_GUARD=FAIL_COMBINED'
+            exit 1
+          fi
+          echo 'VM2_SCOPE_OVERLAP_GUARD=PASS_SINGLE'
