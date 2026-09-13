@@ -1,15 +1,13 @@
-scopes:
-  source:
-    manual:
+merge_queue:
+  max_parallel_checks: 2
 merge_protections_settings:
   auto_merge_conditions: true
 queue_rules:
-  - name: vm2-buildkite-scope-impact
+  - name: vm2-ahead-edit
     batch_size: 1
-    merge_method: merge
+    merge_method: merge-batch
+    allow_queue_branch_edit: true
     queue_conditions:
-      - title ~= ^VM2_BK3_QUEUE_
-      - check-success = @github-actions/vm2-buildkite-scope-guard
+      - title ~= ^VM2_AHEADEDIT_
     merge_conditions:
-      - title ~= ^VM2_BK3_QUEUE_
-      - check-success = @github-actions/vm2-buildkite-scope-guard
+      - check-success = @github-actions/vm2-ahead-edit-guard
