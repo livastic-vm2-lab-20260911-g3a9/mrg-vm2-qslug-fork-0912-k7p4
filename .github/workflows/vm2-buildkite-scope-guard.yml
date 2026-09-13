@@ -1,4 +1,4 @@
-name: VM2 Ahead Edit Guard
+name: VM2 Buildkite scope guard
 on:
   pull_request:
     branches: [main]
@@ -7,26 +7,15 @@ permissions:
   contents: read
 jobs:
   guard:
-    name: vm2-ahead-edit-guard
+    name: vm2-buildkite-scope-guard
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Queue ahead-edit oracle v3
+      - name: Reject combined A+B state
         shell: bash
         run: |
-          echo "VM2_HEAD_REF=${GITHUB_HEAD_REF}"
-          if [[ "${GITHUB_HEAD_REF}" != mergify/merge-queue/* ]]; then
-            echo 'VM2_AHEAD_EDIT_ORIGINAL_PASS'
-            exit 0
-          fi
-          echo 'VM2_AHEAD_EDIT_DRAFT_WAIT=1'
-          sleep 180
-          EDIT=0; CHILD=0
-          [[ -f vm2-ahedit-edit3.txt ]] && EDIT=1
-          [[ -f vm2-ahedit-child3.txt ]] && CHILD=1
-          echo "VM2_AHEAD_EDIT_V3_STATE=EDIT${EDIT}CHILD${CHILD}"
-          if [[ "$EDIT" == 1 && "$CHILD" == 1 ]]; then
-            echo 'VM2_AHEAD_EDIT_GUARD=FAIL_EDIT_PLUS_CHILD'
+          if [[ -f vm2-bk-a.txt && -f vm2-bk-b.txt ]]; then
+            echo 'VM2_COMBINED_SCOPE_GUARD=FAIL'
             exit 1
           fi
-          echo 'VM2_AHEAD_EDIT_GUARD=PASS'
+          echo 'VM2_COMBINED_SCOPE_GUARD=PASS'
