@@ -10,12 +10,12 @@ jobs:
     name: vm2-buildkite-scope-guard
     runs-on: ubuntu-latest
     steps:
-      - name: Reject Mergify merge-queue draft only
+      - uses: actions/checkout@v4
+      - name: Reject combined A+B state
         shell: bash
         run: |
-          echo "VM2_HEAD_REF=${GITHUB_HEAD_REF}"
-          if [[ "${GITHUB_HEAD_REF}" == mergify/merge-queue/* ]]; then
-            echo 'VM2_RETRY_LINEAGE_GUARD=FAIL_DRAFT'
+          if [[ -f vm2-bk-a.txt && -f vm2-bk-b.txt ]]; then
+            echo 'VM2_COMBINED_SCOPE_GUARD=FAIL'
             exit 1
           fi
-          echo 'VM2_RETRY_LINEAGE_GUARD=PASS_ORIGINAL'
+          echo 'VM2_COMBINED_SCOPE_GUARD=PASS'
