@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Queue ahead-edit oracle v2
+      - name: Queue ahead-edit oracle v3
         shell: bash
         run: |
           echo "VM2_HEAD_REF=${GITHUB_HEAD_REF}"
@@ -22,9 +22,9 @@ jobs:
           echo 'VM2_AHEAD_EDIT_DRAFT_WAIT=1'
           sleep 40
           EDIT=0; CHILD=0
-          [[ -f vm2-ahedit-edit2.txt ]] && EDIT=1
-          [[ -f vm2-ahedit-child2.txt ]] && CHILD=1
-          echo "VM2_AHEAD_EDIT_V2_STATE=EDIT${EDIT}CHILD${CHILD}"
+          [[ -f vm2-ahedit-edit3.txt ]] && EDIT=1
+          [[ -f vm2-ahedit-child3.txt ]] && CHILD=1
+          echo "VM2_AHEAD_EDIT_V3_STATE=EDIT${EDIT}CHILD${CHILD}"
           if [[ "$EDIT" == 1 && "$CHILD" == 1 ]]; then
             echo 'VM2_AHEAD_EDIT_GUARD=FAIL_EDIT_PLUS_CHILD'
             exit 1
