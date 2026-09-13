@@ -20,7 +20,7 @@ jobs:
             exit 0
           fi
           echo 'VM2_AHEAD_EDIT_DRAFT_WAIT=1'
-          sleep 40
+          sleep 180
           EDIT=0; CHILD=0
           [[ -f vm2-ahedit-edit3.txt ]] && EDIT=1
           [[ -f vm2-ahedit-child3.txt ]] && CHILD=1
