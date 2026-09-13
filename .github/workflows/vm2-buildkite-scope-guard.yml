@@ -11,19 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Hold only Mergify queue draft
+      - name: Reject combined A+B state
         shell: bash
         run: |
-          echo "VM2_HEAD_REF=${GITHUB_HEAD_REF}"
-          if [[ "${GITHUB_HEAD_REF}" == mergify/merge-queue/* ]]; then
-            echo 'VM2_SCOPE_OVERLAP_DRAFT_WAIT=1'
-            sleep 45
-          fi
-      - name: Reject combined overlap state
-        shell: bash
-        run: |
-          if [[ -f vm2-overlap-a.txt && -f vm2-overlap-b.txt ]]; then
-            echo 'VM2_SCOPE_OVERLAP_GUARD=FAIL_COMBINED'
+          if [[ -f vm2-bk-a.txt && -f vm2-bk-b.txt ]]; then
+            echo 'VM2_COMBINED_SCOPE_GUARD=FAIL'
             exit 1
           fi
-          echo 'VM2_SCOPE_OVERLAP_GUARD=PASS_SINGLE'
+          echo 'VM2_COMBINED_SCOPE_GUARD=PASS'
