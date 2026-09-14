@@ -13,13 +13,3 @@ queue_rules:
     merge_conditions:
       - title ~= ^VM2_BK3_QUEUE_
       - check-success = @github-actions/vm2-buildkite-scope-guard
-  - name: vm2-external-fork-missing-scope
-    batch_size: 1
-    merge_method: merge
-    queue_conditions:
-      - title ~= ^VM2_MISSING_SCOPE_
-      - check-success = @github-actions/vm2-missing-scope-guard
-    merge_conditions:
-      - title ~= ^VM2_MISSING_SCOPE_
-      - check-success = @github-actions/vm2-missing-scope-guard
-      - label = vm2-missing-scope-never-merge
