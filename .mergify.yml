@@ -1,0 +1,37 @@
+scopes:
+  source:
+    manual:
+merge_protections_settings:
+  auto_merge_conditions: true
+commands_restrictions:
+  queue:
+    conditions:
+      - sender-permission >= write
+queue_rules:
+  - name: vm2-buildkite-scope-impact
+    batch_size: 1
+    merge_method: merge
+    queue_conditions:
+      - title ~= ^VM2_BK3_QUEUE_
+      - check-success = @github-actions/vm2-buildkite-scope-guard
+    merge_conditions:
+      - title ~= ^VM2_BK3_QUEUE_
+      - check-success = @github-actions/vm2-buildkite-scope-guard
+  - name: vm2-human-bot-self-command
+    batch_size: 1
+    merge_method: merge
+    queue_conditions:
+      - title = VM2_HUMAN_BOT_SELF_CMD
+      - label = vm2-human-bot-never
+    merge_conditions:
+      - title = VM2_HUMAN_BOT_SELF_CMD
+      - label = vm2-human-bot-never
+pull_request_rules:
+  - name: vm2 human bot self command
+    conditions:
+      - title = VM2_HUMAN_BOT_SELF_CMD
+      - body = @Mergifyio queue
+    actions:
+      comment:
+        message: "{{ body }}"
+        bot_account: livastic-vm2-primary-20260911
