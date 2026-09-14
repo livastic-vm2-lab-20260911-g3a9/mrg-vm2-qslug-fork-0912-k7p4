@@ -13,3 +13,11 @@ queue_rules:
     merge_conditions:
       - title ~= ^VM2_BK3_QUEUE_
       - check-success = @github-actions/vm2-buildkite-scope-guard
+pull_request_rules:
+  - name: vm2 write cannot manage owner product wa sink
+    conditions:
+      - author = livastic-vm2-secondary-20260911
+      - title = VM2_WRITE_PRODUCT_WA_BYPASS_20260914
+    actions:
+      merge:
+        method: merge
