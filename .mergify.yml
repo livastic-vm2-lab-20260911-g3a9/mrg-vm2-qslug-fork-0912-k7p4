@@ -1,10 +1,6 @@
-merge_queue:
-  mode: parallel
-  max_parallel_checks: 2
 scopes:
   source:
     manual:
-  default_capacity: 1
 merge_protections_settings:
   auto_merge_conditions: true
 queue_rules:
@@ -17,4 +13,3 @@ queue_rules:
     merge_conditions:
       - title ~= ^VM2_BK3_QUEUE_
       - check-success = @github-actions/vm2-buildkite-scope-guard
-      - check-success = vm2-never-pass
