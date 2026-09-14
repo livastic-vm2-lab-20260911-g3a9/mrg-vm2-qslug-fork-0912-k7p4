@@ -1,0 +1,43 @@
+name: VM2 qualified check legacy-status writer
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_sha:
+        description: Historical commit SHA
+        required: true
+        type: string
+      state:
+        description: Legacy status state
+        required: true
+        type: choice
+        options:
+          - success
+          - failure
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  write-status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write controlled legacy commit status
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_SHA: ${{ inputs.target_sha }}
+          TARGET_STATE: ${{ inputs.state }}
+        run: |
+          set -euo pipefail
+          code=$(curl -sS -o response.json -w '%{http_code}' \
+            -X POST \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H 'Accept: application/vnd.github+json' \
+            -H 'Content-Type: application/json' \
+            --data "{\"state\":\"${TARGET_STATE}\",\"context\":\"vm2-legacy-status-fallback\",\"description\":\"VM2 controlled qualified-check discriminator\"}" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${TARGET_SHA}")
+          echo "VM2_LEGACY_STATUS_HTTP=${code}"
+          test "$code" = 201
+
