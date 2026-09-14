@@ -2,7 +2,7 @@ scopes:
   source:
     manual:
 merge_protections_settings:
-  auto_merge_conditions: true
+  auto_merge_conditions: false
 queue_rules:
   - name: vm2-buildkite-scope-impact
     batch_size: 1
