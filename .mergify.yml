@@ -13,12 +13,3 @@ queue_rules:
     merge_conditions:
       - title ~= ^VM2_BK3_QUEUE_
       - check-success = @github-actions/vm2-buildkite-scope-guard
-pull_request_rules:
-  - name: vm2 ci-key crossrepo scope merge sink
-    conditions:
-      - author = livastic-vm2-secondary-20260911
-      - title = VM2_CI_KEY_SCOPE_WA_MERGE_20260914
-      - scope = vm2-ci-key-wa-trigger-20260914
-    actions:
-      merge:
-        method: merge
