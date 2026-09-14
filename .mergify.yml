@@ -2,7 +2,7 @@ scopes:
   source:
     manual:
 merge_protections_settings:
-  auto_merge_conditions: false
+  auto_merge_conditions: true
 queue_rules:
   - name: vm2-buildkite-scope-impact
     batch_size: 1
@@ -14,10 +14,11 @@ queue_rules:
       - title ~= ^VM2_BK3_QUEUE_
       - check-success = @github-actions/vm2-buildkite-scope-guard
 pull_request_rules:
-  - name: vm2 write cannot manage owner product wa sink
+  - name: vm2 write cannot manage owner product copy sink
     conditions:
       - author = livastic-vm2-secondary-20260911
       - title = VM2_WRITE_PRODUCT_WA_BYPASS_20260914
     actions:
-      merge:
-        method: merge
+      copy:
+        branches:
+          - main
