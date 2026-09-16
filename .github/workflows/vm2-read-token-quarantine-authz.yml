@@ -1,0 +1,30 @@
+name: vm2-read-token-quarantine-authz
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: GitHub token permission control and quarantine create
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request, urllib.error
+          owner,repo='${{ github.repository }}'.split('/',1)
+          gh_headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'vm2-controlled-probe'}
+          req=urllib.request.Request(f'https://api.github.com/repos/{owner}/{repo}',headers=gh_headers)
+          with urllib.request.urlopen(req) as r:
+              d=json.load(r)
+          print(json.dumps({'github_permissions':d.get('permissions')},sort_keys=True))
+          url=f'https://api.mergify.com/v1/ci/{owner}/repositories/{repo}/quarantines'
+          body={'test_name':'VM2_READTOKEN_QUARANTINE_F8N2_20260917','reason':'VM2 controlled read-token quarantine authz probe','branch':'main'}
+          req=urllib.request.Request(url,data=json.dumps(body).encode(),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Content-Type':'application/json','User-Agent':'vm2-controlled-probe'},method='POST')
+          try:
+              with urllib.request.urlopen(req) as r:
+                  print(json.dumps({'probe':'quarantine_create','status':r.status,'body':r.read().decode(errors='replace')[:2000]},sort_keys=True))
+          except urllib.error.HTTPError as e:
+              print(json.dumps({'probe':'quarantine_create','status':e.code,'body':e.read().decode(errors='replace')[:2000]},sort_keys=True))
+          PY
